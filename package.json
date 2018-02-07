@@ -1,0 +1,19 @@
+{
+  "name": "internship",
+  "version": "1.0.0",
+  "description": "CI internship",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamjack996/internship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamjack996/internship/issues"
+  },
+  "homepage": "https://github.com/iamjack996/internship#readme"
+}
