@@ -1,6 +1,7 @@
 
+
     <!-- About Section -->
-    <section id="about" class="content-section text-center">
+    <section id="content" class="content-section text-center">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
