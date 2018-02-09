@@ -6,7 +6,7 @@
           <div class="col-lg-8 mx-auto">
             <h2>註冊會員</h2>
             <?php echo validation_errors(); ?>
-            <?php echo form_open('/registeredpost');?>
+            <?php echo form_open('/registeredpost#content');?>
             <fieldset>
               <div class="row">
                 <label>Email *</label>
@@ -50,5 +50,3 @@
         </div>
       </div>
     </section>
-
-    

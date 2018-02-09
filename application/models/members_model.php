@@ -16,10 +16,20 @@ class members_model extends CI_Model{
       return $this->db->insert('members', $data);
     }
 
+    public function edit(){
+      $user_account = $this->session->userdata('user_account');
+      $query = $this->db->get_where('members', array('m_email' => $user_account));
+			return $query->row_array();
+    }
+
+    public function update(){
+      
+    }
+
     public function logincheck(){
-      $sql = "SELECT m_password FROM members WHERE m_email = ?";
-      $this->db->query($sql, array($this->input->post('email'));
-      //登入寫到一半
+      $account = $this->input->post('email');
+      $query = $this->db->get_where('members', array('m_email' => $account));
+      return $query->row_array();
     }
 
   }

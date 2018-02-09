@@ -53,5 +53,9 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// $route["registered"] = 'home/registered';
+$route["memberCenter"] = 'memberCenter/index';
+
+// $route["index/(:num)"] = 'index/index/$1';
+// $route["(:any)"] = 'index/index/$1';
+// $route["memberCenter/(:any)"] = 'memberCenter/$1';
 $route["(:any)"] = 'home/$1';

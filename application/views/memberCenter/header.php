@@ -11,15 +11,15 @@
     <title>Grayscale - Start Bootstrap Theme</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="css/grayscale.min.css" rel="stylesheet">
+    <link href="../css/grayscale.min.css" rel="stylesheet">
 
   </head>
 
@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">關於我們</a>
+              <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>#about">關於我們</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#">商品列</a>
@@ -75,23 +75,3 @@
         </div>
       </div>
     </nav>
-
-        <!-- Intro Header -->
-        <header class="masthead" id="about">
-          <div class="intro-body">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8 mx-auto">
-                  <p><?php if(null !== $this->session->flashdata('msg')){
-                     echo('** '.$this->session->flashdata('msg')).' **';
-                   } ?></p>
-                  <h1 class="brand-heading">Watch</h1>
-                  <p class="intro-text">誕生源自G-SHOCK設計之父 – 伊部菊雄一個簡單的想法，一只摔不壞的手錶。但即便他在錶殼外包裹再厚的橡膠，手錶依舊經不起摔。.</p>
-                  <a href="#content" class="btn btn-circle js-scroll-trigger">
-                    <i class="fa fa-angle-double-down animated"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
