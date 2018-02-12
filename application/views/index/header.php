@@ -20,7 +20,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/grayscale.min.css" rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 
   <body id="page-top">
@@ -48,15 +48,21 @@
               <a class="nav-link js-scroll-trigger" href="#">友善連結</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#">最新消息</a>
+              <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>allnews#content">最新消息</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#">活動與報名</a>
             </li>
             <?php if(isset($_SESSION['user_account'])){ ?>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>memberCenter/index">會員專區</a>
-              </li>
+              <?php if($_SESSION['user_Admin'] === 'admin'){ ?>
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin/index">管理後台</a>
+                </li>
+              <?php }else{ ?>
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>memberCenter/index">會員專區</a>
+                </li>
+              <?php } ?>
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>logout">登出</a>
               </li>

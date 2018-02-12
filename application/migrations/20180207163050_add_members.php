@@ -42,8 +42,8 @@ class Migration_Add_members extends CI_Migration {
                                 'null' => TRUE,
                         ),
                         'm_isAdmin' => array(
-                                'type' => 'INT',
-                                'constraint' => 10,
+                                'type' => 'VARCHAR',
+                                'constraint' => 20,
                                 'null' => TRUE,
                         ),
                         'm_created_at' => array(

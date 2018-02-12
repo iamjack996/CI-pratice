@@ -66,12 +66,16 @@ class Home extends CI_Controller {
       }else{
         if($this->input->post('password') === $data['check']['m_password']){
           $this->session->set_userdata('user_account', $data['check']['m_email']);
+          $this->session->set_userdata('user_Admin', $data['check']['m_isAdmin']);
           if($this->input->post('remember') === 'keep'){
             $this->input->set_cookie('email',$data['check']['m_email'],0);
             $this->input->set_cookie('password',$data['check']['m_password'],0);
           }else{
             delete_cookie('email');
             delete_cookie('password');
+          }
+          if($data['check']['m_isAdmin'] === 'admin'){
+            redirect('admin/index');
           }
           redirect('memberCenter/index');
         }else{
@@ -86,6 +90,7 @@ class Home extends CI_Controller {
   public function logout()
   {
     $this->session->unset_userdata('user_account');
+    $this->session->unset_userdata('user_Admin');
     $this->load->view('index/header');
     $this->load->view('index/index');
     $this->load->view('index/footer');
@@ -113,6 +118,23 @@ class Home extends CI_Controller {
       $this->session->set_flashdata('msg', '成功寄出！感謝你的回饋');
       redirect('index','refresh');
     }
+  }
+
+  public function allnews($slug = NULL){
+    $data['news'] = $this->news_model->show();
+    $data['from'] = 'front';
+
+    $this->load->view('index/header');
+    $this->load->view('admin/news' , $data);
+    $this->load->view('index/footer');
+  }
+
+  public function news($slug = NULL){
+    $data['news'] = $this->news_model->show($slug);
+
+    $this->load->view('memberCenter/header');
+    $this->load->view('index/showNews' , $data);
+    $this->load->view('memberCenter/footer');
   }
 
 

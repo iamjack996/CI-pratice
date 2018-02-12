@@ -1,5 +1,4 @@
 
-
     <!-- About Section -->
     <section id="content" class="content-section text-center">
       <div class="container">
