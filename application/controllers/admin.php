@@ -24,5 +24,14 @@ class Admin extends CI_Controller {
     $this->load->view('memberCenter/footer');
   }
 
+  public function newsUpdate(/*$slug = NULL*/){
+    $result = $this->news_model->update(/*$slug*/);
+    $msg = false;
+      if($result){
+        $msg = true;
+      }
+    return json_encode($msg);
+  }
+
 
 }

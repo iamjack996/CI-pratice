@@ -14,5 +14,21 @@ class news_model extends CI_Model{
 			return $query->row_array();
 		}
 
+	public function update(/*$slug = FALSE*/){
+			$data = array(
+				'n_slug' => $this->input->post('slug'),
+        'n_title' => $this->input->post('title'),
+        'n_content' => $this->input->post('content'),
+      );
+			$this->db->where('n_slug', $data['n_slug']);
+			$this->db->update('news', $data);
+
+			if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+		}
+
   }
 ?>
