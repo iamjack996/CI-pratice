@@ -64,14 +64,14 @@ class Admin extends CI_Controller {
     //   $this->load->view('memberCenter/footer');
     // }else{
       $config = array(
-      'upload_path' => getcwd()."/uploads/",
-      'allowed_types' => "gif|jpg|png|jpeg|pdf",
-      'overwrite' => TRUE,
-      'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-      'max_height' => "1200",
-      'max_width' => "1600"
+        'upload_path' => getcwd()."/uploads/", //getcw 等同 base_url
+        'allowed_types' => "gif|jpg|png|jpeg|pdf",
+        'overwrite' => TRUE,
+        'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+        'max_height' => "1200",
+        'max_width' => "1600"
       );
-      $this->upload->initialize($config);
+      $this->upload->initialize($config); // 加這個才沒報錯(path)
       $this->load->library('upload', $config); //可成功上傳至本地uploads
       if($this->upload->do_upload())
       {
@@ -80,12 +80,12 @@ class Admin extends CI_Controller {
       }
       else
       {
-      $error = array('error' => $this->upload->display_errors());
-      print_r($config['upload_path']);
-      $this->load->view('memberCenter/header');
-      $this->load->view('admin/productUpload', $error);
-      $this->load->view('memberCenter/footer');
-    }
+        $error = array('error' => $this->upload->display_errors());
+        print_r($config['upload_path']);
+        $this->load->view('memberCenter/header');
+        $this->load->view('admin/productUpload', $error);
+        $this->load->view('memberCenter/footer');
+      }
 
 
       // $this->products_model->store();
