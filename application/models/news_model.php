@@ -2,6 +2,7 @@
 class news_model extends CI_Model{
 		public function __construct(){
 			$this->load->database();
+			$this->now = date("Y-m-d H:i:s");
 		}
 
     public function show($slug = FALSE){
@@ -14,7 +15,22 @@ class news_model extends CI_Model{
 			return $query->row_array();
 		}
 
-	public function update(/*$slug = FALSE*/){
+		public function store(){
+			$data = array(
+        'n_title' => $this->input->post('title'),
+        'n_slug' => url_title($this->input->post('title')),
+        'n_content' => $this->input->post('content'),
+        'n_created_at' => $this->now
+      );
+			$query = $this->db->get_where('news', array('n_slug' => $data['n_slug']));
+			if ($query->num_rows() == 0){
+				return $this->db->insert('news', $data);
+			}else{
+				return false;
+			}
+		}
+
+		public function update(/*$slug = FALSE*/){
 			$data = array(
 				'n_slug' => $this->input->post('slug'),
         'n_title' => $this->input->post('title'),
@@ -29,6 +45,19 @@ class news_model extends CI_Model{
         return false;
       }
 		}
+
+		public function delete($slug = FALSE){
+			// $query = $this->db->where('n_slug', $slug);
+			$query = $this->db->get_where('news', array('n_slug' => $slug));
+			if ($query->num_rows() > 0){
+				$this->db->where('n_slug', $slug);
+				$this->db->delete('news');
+				return true;
+			}else{
+				return false;
+			}
+		}
+
 
   }
 ?>

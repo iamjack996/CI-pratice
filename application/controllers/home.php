@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		$this->load->library('javascript', FALSE);
     $this->load->library('session');
     $this->load->helper('cookie');
+    $this->load->library('user_agent');
   }
 
   public function index()
@@ -37,7 +38,11 @@ class Home extends CI_Controller {
       $this->load->view('index/registered');
       $this->load->view('index/footer');
     }else{
-      $this->members_model->store();
+      $result = $this->members_model->store();
+      if($result === false){
+        $this->session->set_flashdata('msg', '註冊失敗，郵件重複登記');
+        redirect('registered','refresh');
+      }
       $this->session->set_flashdata('msg', '註冊成功！可以開始登入會員系統');
       redirect('login','refresh');
     }
@@ -124,12 +129,14 @@ class Home extends CI_Controller {
     $data['news'] = $this->news_model->show();
     $data['from'] = 'front';
 
+    $this->session->set_userdata('referred_from', 'home');
+
     $this->load->view('index/header');
     $this->load->view('admin/news' , $data);
     $this->load->view('index/footer');
   }
 
-  public function news($slug = NULL){
+  public function news($slug = NULL){ //show one news
     $data['news'] = $this->news_model->show($slug);
 
     $this->load->view('memberCenter/header');

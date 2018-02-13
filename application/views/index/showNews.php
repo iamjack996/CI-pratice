@@ -3,14 +3,16 @@
   <section id="content" class="content-section text-center">
 
     <?php if(isset($_SESSION['user_account'])){ ?>
-      <?php if($_SESSION['user_Admin'] === 'admin'){ ?>
+      <?php if(($_SESSION['referred_from'] === 'admin')&&($_SESSION['user_Admin'] === 'admin')){ ?>
+        <a class="btn btn-secondary" href="<?= $_SESSION['referred_url'] ?>">返回</a>
         <button type="button" class="btn btn-secondary" id="touch-edit-news" name="button">編輯</button>
         <br><br>
       <?php } ?>
     <?php } ?>
-    <div class="container" id="show-news">
+    <div class="container">
+      <span class="intro-text"><?= $news['n_created_at']; ?></span><br><br>
       <div class="row">
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-8 mx-auto" id="show-news">
           <h1 class="brand-heading"><?= $news['n_title']; ?></h1>
           <p class="intro-text"><?= $news['n_content']; ?></p>
         </div>
@@ -33,32 +35,44 @@
 </header>
 
 <script type="text/javascript">
-$(document).ready(function(){
-  $("#touch-edit-news,#unchange-news").click(function(e){
-    $("#touch-edit-news").toggle();
-    $("#edit-news").toggle();
-    $("#show-news").toggle();
-    // $("#new-news-title").val($("#title").val());
-    // $("#new-news-content").val($("#content").val());
-  });
-  $("#unchange-news").click(function(){
-    $("#new-news-title").val($("#title").val());
-    $("#new-news-content").val($("#recontent").val());
-  });
-  $("#change-news").click(function(e){
-    e.preventDefault();
-    $.ajax({
-      method: "POST",
-      url: '<?php echo base_url() ?>admin/newsUpdate',
-      data: {slug:$("#slug").val(),title:$("#title").val(),content:$("#recontent").val()},  //
-      success: function(data){
-          console.log(data);
-        },error: function(){
-          alert('Fail');
-        }
-    })
-  });
+  $(document).ready(function(){
+    $("#touch-edit-news,#unchange-news").click(function(e){
+      $("#touch-edit-news").toggle();
+      $("#edit-news").toggle();
+      $("#show-news").toggle();
+      // $("#new-news-title").val($("#title").val());
+      // $("#new-news-content").val($("#content").val());
+    });
+    $("#unchange-news").click(function(){
+      $("#new-news-title").val($("#title").val());
+      $("#new-news-content").val($("#recontent").val());
+    });
+    $("#change-news").click(function(e){
+      e.preventDefault();
+      $.ajax({
+        type : "ajax",
+        method: "POST",
+        url: '<?php echo base_url() ?>admin/newsUpdate',
+        data: {slug:$("#slug").val(),title:$("#new-news-title").val(),content:$("#new-news-content").val()},  //
+        success: function(data){
+            console.log(data);
+            $("#touch-edit-news").toggle();
+            $("#edit-news").toggle();
+            $("#show-news").toggle();
+            $("#title").val($("#new-news-title").val());
+            $("#recontent").val($("#new-news-content").val());
+            var item =
+            '<div class="col-lg-8 mx-auto" id="show-news">'+
+              '<h1 class="brand-heading">'+$("#new-news-title").val()+'</h1>'+
+              '<p class="intro-text">'+$("#new-news-content").val()+'</p>'+
+            '</div>';
+            $("#show-news").replaceWith(item);
+          },error: function(){
+            alert('Fail');
+          }
+      })
+    });
 
-});
+  });
 
 </script>

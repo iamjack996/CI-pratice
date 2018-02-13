@@ -17,7 +17,12 @@ class members_model extends CI_Model{
         'm_isAdmin' => 'normal',
 				'm_created_at' => $this->now
       );
-      return $this->db->insert('members', $data);
+			$query = $this->db->get_where('members', array('m_email' => $data['m_email']));
+			if ($query->num_rows() == 0){
+				return $this->db->insert('members', $data);
+			}else{
+				return false;
+			}
     }
 
     public function edit(){

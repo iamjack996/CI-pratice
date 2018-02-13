@@ -30,7 +30,8 @@ class Migration_Add_products extends CI_Migration {
                                 'null' => FALSE,
                         ),
                         'p_image' => array(
-                                'type' => 'binary',
+                                'type' => 'VARCHAR',
+                                'constraint' => 255,
                                 'null' => TRUE,
                         ),
                         'p_kind' => array(

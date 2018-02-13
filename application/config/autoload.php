@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('members_model','contacts_model','news_model'); //SET要使用的MODEL
+$autoload['model'] = array('members_model','contacts_model','news_model','products_model'); //SET要使用的MODEL

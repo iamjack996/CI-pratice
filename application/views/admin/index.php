@@ -6,7 +6,7 @@
     <div class="container">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#">產品管理</a>
+          <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin/productManage">產品管理</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin/news">消息管理</a>

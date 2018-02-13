@@ -37,7 +37,7 @@
               </div>
               <div class="row">
                 <label>Address</label>
-                <input type="test" class="form-control" name="address" value="<?php echo set_value('address'); ?>" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="address" value="<?php echo set_value('address'); ?>" aria-describedby="emailHelp">
               </div>
               <br>
               <div class="container">
