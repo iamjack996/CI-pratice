@@ -38,7 +38,8 @@ class members_model extends CI_Model{
         'm_name' => $this->input->post('name'),
         'm_phonenum' => $this->input->post('phonenum'),
         'm_birth' => $this->input->post('birth'),
-        'm_address' => $this->input->post('address')
+        'm_address' => $this->input->post('address'),
+				'm_updated_at' => $this->now
       );
       $this->db->where('m_email', $this->input->post('old_email'));
       return $this->db->update('members', $data);

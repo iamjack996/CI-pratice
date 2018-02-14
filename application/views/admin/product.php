@@ -25,13 +25,17 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <?php foreach($news as $news): ?> -->
+        <?php foreach($products as $products): ?>
           <tr>
-            <td><a class="nav-link" href="<?php echo (base_url().'news/'.$news['n_slug']); ?>"><?php echo $news['n_title']; ?></a></td>
-            <td><?php echo $news['n_created_at']; ?></td>
-            <td><?php echo word_limiter($news['n_content'], 10); ?></td>
+            <td><?php echo $products['p_image']; ?></td>
+            <td><?php echo $products['p_title']; ?></td>
+            <td><?php echo $products['p_slug']; ?></td>
+            <td><?php echo $products['p_kind']; ?></td>
+            <td><?php echo $products['p_price']; ?></td>
+            <td><?php echo word_limiter($products['p_description'], 10); ?></td>
+            <td><?php echo $products['p_created_at']; ?></td>  
           </tr>
-        <!-- <?php endforeach; ?> -->
+        <?php endforeach; ?>
       </tbody>
     </table>
   </section>

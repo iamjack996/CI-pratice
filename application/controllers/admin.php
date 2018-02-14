@@ -39,8 +39,9 @@ class Admin extends CI_Controller {
   }
 
   public function productManage(){
+    $data['products'] = $this->products_model->show();
     $this->load->view('memberCenter/header');
-    $this->load->view('admin/product');
+    $this->load->view('admin/product' , $data);
     $this->load->view('memberCenter/footer');
   }
 
@@ -51,20 +52,19 @@ class Admin extends CI_Controller {
   }
 
   public function productUploadPost(){
-    // $this->form_validation->set_rules('title', 'Title', 'required');
-    // $this->form_validation->set_rules('slug', 'Slug', 'required|alpha_numeric');
-    // $this->form_validation->set_rules('kind', 'Kind', 'required');
-    // $this->form_validation->set_rules('price', 'Price', 'required|integer|is_natural');
-    // $this->form_validation->set_rules('description', 'Description', 'required');
-    // $this->form_validation->set_rules('image', 'Image', 'required');
+    $this->form_validation->set_rules('title', 'Title', 'required');
+    $this->form_validation->set_rules('slug', 'Slug', 'required');
+    $this->form_validation->set_rules('kind', 'Kind', 'required');
+    $this->form_validation->set_rules('price', 'Price', 'required|integer|is_natural');
+    $this->form_validation->set_rules('description', 'Description', 'required');
 
-    // if($this->form_validation->run() === FALSE){
-    //   $this->load->view('memberCenter/header');
-    //   $this->load->view('admin/productUpload');
-    //   $this->load->view('memberCenter/footer');
-    // }else{
+    if($this->form_validation->run() === FALSE){
+      $this->load->view('memberCenter/header');
+      $this->load->view('admin/productUpload' , array('error' => ' ' ));
+      $this->load->view('memberCenter/footer');
+    }else{
       $config = array(
-        'upload_path' => getcwd()."/uploads/", //getcw 等同 base_url
+        'upload_path' => getcwd()."/uploads/", //getcwd 等同 base_url
         'allowed_types' => "gif|jpg|png|jpeg|pdf",
         'overwrite' => TRUE,
         'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
@@ -72,27 +72,24 @@ class Admin extends CI_Controller {
         'max_width' => "1600"
       );
       $this->upload->initialize($config); // 加這個才沒報錯(path)
-      $this->load->library('upload', $config); //可成功上傳至本地uploads
-      if($this->upload->do_upload())
+      $this->load->library('upload', $config);
+      if($this->upload->do_upload()) //可成功上傳至本地uploads
       {
-      // $data = array('upload_data' => $this->upload->data());
-      // $this->load->view('upload_success',$data);
+        $data = $this->upload->data();
+        $fileName = $data['raw_name'].$data['file_ext']; //取得黨名與格式
+        $this->products_model->store($fileName);
+        $this->session->set_flashdata('msg', '產品上傳成功！');
+        redirect('admin/productManage');
       }
       else
       {
         $error = array('error' => $this->upload->display_errors());
-        print_r($config['upload_path']);
+        // print_r($config['upload_path']);
         $this->load->view('memberCenter/header');
         $this->load->view('admin/productUpload', $error);
         $this->load->view('memberCenter/footer');
       }
-
-
-      // $this->products_model->store();
-      // $this->session->set_flashdata('msg', '產品上傳成功！');
-      // redirect('admin/productManage');
-    // }
-
+    }
   }
 
   public function newsCreate(){

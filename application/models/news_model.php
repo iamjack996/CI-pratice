@@ -35,6 +35,7 @@ class news_model extends CI_Model{
 				'n_slug' => $this->input->post('slug'),
         'n_title' => $this->input->post('title'),
         'n_content' => $this->input->post('content'),
+				'n_updated_at' => $this->now
       );
 			$this->db->where('n_slug', $data['n_slug']);
 			$this->db->update('news', $data);
