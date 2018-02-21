@@ -76,8 +76,8 @@ class members_model extends CI_Model{
 		public function validate_email($email,$email_code){
 			$result = false;
 			$query = $this->db->get_where('members', array('m_email' => $email));
-			$row = $query->row();
-			if ($query->num_rows() === 1){
+			$row = $query->row_array();
+			if ($query->num_rows() === 1){   // $row->m_created_at可能取不到
 				if(md5((string)$row->m_created_at) === $email_code){
 					$activated = $this->db->update('members', array('m_activated' => 1));
 					if($this->db->affected_rows() == 1){
