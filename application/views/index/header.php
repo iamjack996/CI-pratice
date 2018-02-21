@@ -39,7 +39,7 @@
               <a class="nav-link js-scroll-trigger" href="#about">關於我們</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#">商品列</a>
+              <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>productslist#content">商品列</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>contacts#content">聯絡我們</a>

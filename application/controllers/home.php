@@ -43,9 +43,21 @@ class Home extends CI_Controller {
         $this->session->set_flashdata('msg', '註冊失敗，郵件重複登記');
         redirect('registered','refresh');
       }
-      $this->session->set_flashdata('msg', '註冊成功！可以開始登入會員系統');
+      $this->session->set_flashdata('msg', '註冊成功！請驗證信箱後，即可登入會員系統');
       redirect('login','refresh');
     }
+  }
+
+  public function validate_email($email,$email_code){
+    $email_code = trim($email_code);
+    $validated = $this->members_model->validate_email($email,$email_code);
+    // print_r($email_code);
+    if($validated === true){
+      $this->session->set_flashdata('msg', '驗證成功！可以開始登入會員系統');
+      redirect('login','refresh');
+    }
+    $this->session->set_flashdata('msg', '尚未驗證！請至註冊信箱點擊信件');
+    redirect('login','refresh');
   }
 
   public function login()
@@ -142,6 +154,14 @@ class Home extends CI_Controller {
     $this->load->view('memberCenter/header');
     $this->load->view('index/showNews' , $data);
     $this->load->view('memberCenter/footer');
+  }
+
+  public function productslist(){
+    $data['products'] = $this->products_model->show();
+
+    $this->load->view('index/header');
+    $this->load->view('index/productslist' , $data);
+    $this->load->view('index/footer');
   }
 
 

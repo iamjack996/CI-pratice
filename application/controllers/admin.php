@@ -11,6 +11,20 @@ class Admin extends CI_Controller {
     $this->now = date("Y-m-d H:i:s");
     $this->load->library('upload');
     $this->load->helper(array('form', 'url'));
+
+    $this->is_Admin();
+  }
+
+  public function is_Admin(){
+   // print_r($this->session->userdata('user_Admin'));
+    if($this->session->userdata('user_Admin') == NULL){
+      $data['msg'] = '無權訪問，請先登入';
+      $this->load->view('index/login' , $data);
+      $this->load->view('index/footer');
+    }elseif ($this->session->userdata('user_Admin') != 'admin') {
+      $this->session->set_flashdata('msg', '管理者權限不符');
+      redirect('index','refresh');
+    }
   }
 
 	public function index(){
@@ -73,7 +87,7 @@ class Admin extends CI_Controller {
       );
       $this->upload->initialize($config); // 加這個才沒報錯(path)
       $this->load->library('upload', $config);
-      if($this->upload->do_upload()) //可成功上傳至本地uploads
+      if($this->upload->do_upload()) //if可成功上傳至本地uploads
       {
         $data = $this->upload->data();
         $fileName = $data['raw_name'].$data['file_ext']; //取得黨名與格式

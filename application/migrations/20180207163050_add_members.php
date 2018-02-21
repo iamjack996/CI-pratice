@@ -46,6 +46,11 @@ class Migration_Add_members extends CI_Migration {
                                 'constraint' => 20,
                                 'null' => TRUE,
                         ),
+                        'm_activated' => array(
+                                'type' => 'TINYINT',
+                                'default' => 0,
+                                'null' => TRUE,
+                        ),
                         'm_created_at' => array(
                                 'type' => 'timestamp',
                                 'null' => TRUE,

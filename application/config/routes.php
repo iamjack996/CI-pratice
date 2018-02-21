@@ -59,4 +59,5 @@ $route["memberCenter"] = 'memberCenter/index';
 // $route["(:any)"] = 'index/index/$1';
 // $route["memberCenter/(:any)"] = 'memberCenter/$1';
 $route["news/(:any)"] = 'home/news/$1';
+$route["validate_email/(:any)/(:any)"] = 'home/validate_email/$1/$2';
 $route["(:any)"] = 'home/$1';

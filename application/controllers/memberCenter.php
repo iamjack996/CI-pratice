@@ -8,10 +8,22 @@ class MemberCenter extends CI_Controller {
 		$this->load->library('javascript', FALSE);
     $this->load->library('session');
     $this->load->helper('cookie');
+    
+    $this->is_member();
+
+  }
+
+  public function is_member(){
+    if($this->session->userdata('user_Admin') == NULL){
+      $data['msg'] = '無權訪問，請先登入';
+      $this->load->view('index/login' , $data);
+      $this->load->view('index/footer');
+    }
   }
 
 	public function index()
 	{
+    // $this->is_member();
     $this->load->view('memberCenter/header');
     $this->load->view('memberCenter/index');
     $this->load->view('memberCenter/footer');

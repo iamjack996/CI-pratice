@@ -27,13 +27,13 @@
       <tbody>
         <?php foreach($products as $products): ?>
           <tr>
-            <td><?php echo $products['p_image']; ?></td>
+            <td><img src="../uploads/<?php echo $products['p_image']; ?>"></td>
             <td><?php echo $products['p_title']; ?></td>
             <td><?php echo $products['p_slug']; ?></td>
             <td><?php echo $products['p_kind']; ?></td>
             <td><?php echo $products['p_price']; ?></td>
             <td><?php echo word_limiter($products['p_description'], 10); ?></td>
-            <td><?php echo $products['p_created_at']; ?></td>  
+            <td><?php echo $products['p_created_at']; ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

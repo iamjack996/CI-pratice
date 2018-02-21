@@ -11,7 +11,7 @@ class products_model extends CI_Model{
 				$query = $this->db->get('products');
 				return $query->result_array();
 			}
-			$query = $this->db->get_where('news', array('p_slug' => $slug));
+			$query = $this->db->get_where('products', array('p_slug' => $slug));
 			return $query->row_array();
 		}
 
@@ -32,6 +32,7 @@ class products_model extends CI_Model{
 				return false;
 			}
     }
+
 
 
 
