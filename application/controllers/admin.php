@@ -141,5 +141,11 @@ class Admin extends CI_Controller {
     redirect('admin/news','refresh');
   }
 
+  public function qaSetting(){
+    $this->load->view('memberCenter/header');
+    $this->load->view('admin/qaSetting');
+    $this->load->view('memberCenter/footer');
+  }
+
 
 }

@@ -75,6 +75,9 @@
               </li>
             <?php } ?>
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>autoanswer">Q & A</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>#download">詳情資訊</a>
             </li>
           </ul>

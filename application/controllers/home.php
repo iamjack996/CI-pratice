@@ -51,8 +51,8 @@ class Home extends CI_Controller {
   public function validate_email($email,$email_code){
     $email_code = trim($email_code);
     $validated = $this->members_model->validate_email($email,$email_code);
-    // print_r($email_code);
-    if($validated === true){
+    print_r($validated);
+    if($validated == true){
       $this->session->set_flashdata('msg', '驗證成功！可以開始登入會員系統');
       redirect('login','refresh');
     }
@@ -77,24 +77,28 @@ class Home extends CI_Controller {
     }else{
       $data['check'] = $this->members_model->logincheck();
       if(empty($data['check'])){
-        $data['msg'] = '無此帳號，請先加入會員';
-        $this->load->view('index/login' , $data);
-        $this->load->view('index/footer');
+        $this->session->set_flashdata('msg', '無此帳號，請先加入會員');
+        redirect('login','refresh');
       }else{
         if($this->input->post('password') === $data['check']['m_password']){
-          $this->session->set_userdata('user_account', $data['check']['m_email']);
-          $this->session->set_userdata('user_Admin', $data['check']['m_isAdmin']);
-          if($this->input->post('remember') === 'keep'){
-            $this->input->set_cookie('email',$data['check']['m_email'],0);
-            $this->input->set_cookie('password',$data['check']['m_password'],0);
+          if($data['check']['m_activated'] == 0){
+            $this->session->set_flashdata('msg', '尚未驗證！請至註冊信箱點擊信件');
+            redirect('login','refresh');
           }else{
-            delete_cookie('email');
-            delete_cookie('password');
+            $this->session->set_userdata('user_account', $data['check']['m_email']);
+            $this->session->set_userdata('user_Admin', $data['check']['m_isAdmin']);
+            if($this->input->post('remember') === 'keep'){
+              $this->input->set_cookie('email',$data['check']['m_email'],0);
+              $this->input->set_cookie('password',$data['check']['m_password'],0);
+            }else{
+              delete_cookie('email');
+              delete_cookie('password');
+            }
+            if($data['check']['m_isAdmin'] === 'admin'){
+              redirect('admin/index');
+            }
+            redirect('memberCenter/index');
           }
-          if($data['check']['m_isAdmin'] === 'admin'){
-            redirect('admin/index');
-          }
-          redirect('memberCenter/index');
         }else{
           $data['msg'] = '密碼錯誤，請重新嘗試';
           $this->load->view('index/login' , $data);

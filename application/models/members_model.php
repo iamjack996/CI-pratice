@@ -77,12 +77,13 @@ class members_model extends CI_Model{
 			$result = false;
 			$query = $this->db->get_where('members', array('m_email' => $email));
 			$row = $query->row_array();
-			if ($query->num_rows() === 1){   // $row->m_created_at可能取不到
-				if(md5((string)$row->m_created_at) === $email_code){
+			if ($query->num_rows() === 1){  // 有找到該帳戶
+				if(md5((string)$row['m_created_at']) === $email_code){ // $row->m_created_at取不到值
+					$this->db->where('m_email', $email);
 					$activated = $this->db->update('members', array('m_activated' => 1));
-					if($this->db->affected_rows() == 1){
-						$result = ture;
-					}
+					// if($this->db->affected_rows() == 1){
+						$result = true;
+					// }
 				}
 			}
 			return $result;

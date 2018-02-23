@@ -12,6 +12,9 @@
           <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin/news">消息管理</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin/qaSetting">Q&A設定</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#">會員管理</a>
         </li>
         <li class="nav-item">
